@@ -1,0 +1,3 @@
+dataset, conv_layer_type, num_epochs, batch_size, learning_rate, random_seed, decay, num_of_runs, current_run, weight_type, train_acc (%), test_acc (%), train time (mins), test time (mins) 
+MSTAR, 4, 5, 16, 0.001, 7, 0.0004, 1, 0, norm, 96.99133333333333, 97.91, 12.747074854373931 
+

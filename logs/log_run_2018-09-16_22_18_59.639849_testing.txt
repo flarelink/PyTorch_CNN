@@ -1,0 +1,73 @@
+dataset_type   = MSTAR 
+conv_layer_type= 4 
+num_epochs     = 5 
+batch_size     = 16 
+learning_rate  = 0.001 
+random_seed    = 7 
+decay          = 0.0004 
+num_of_runs    = 1 
+ 
+Current run is: 0 
+dataloaders created successfully 
+ 
+The weight distribution type is: norm
+Epoch 1, 10% 	 train_loss: 0.66 took: 4.91s 
+Epoch 1, 20% 	 train_loss: 0.31 took: 6.31s 
+Epoch 1, 30% 	 train_loss: 0.22 took: 5.01s 
+Epoch 1, 40% 	 train_loss: 0.17 took: 9.09s 
+Epoch 1, 50% 	 train_loss: 0.16 took: 10.09s 
+Epoch 1, 60% 	 train_loss: 0.14 took: 8.79s 
+Epoch 1, 70% 	 train_loss: 0.11 took: 8.51s 
+Epoch 1, 80% 	 train_loss: 0.12 took: 8.52s 
+Epoch 1, 90% 	 train_loss: 0.12 took: 10.35s 
+Train Accuracy of the model at epoch 0 on the 60000 train images: 93.75333333333333 % 
+Test Accuracy of the model on the 625 test images: 97.04 % 
+Epoch 2, 10% 	 train_loss: 0.08 took: 11.85s 
+Epoch 2, 20% 	 train_loss: 0.08 took: 12.45s 
+Epoch 2, 30% 	 train_loss: 0.09 took: 12.24s 
+Epoch 2, 40% 	 train_loss: 0.09 took: 12.33s 
+Epoch 2, 50% 	 train_loss: 0.08 took: 12.64s 
+Epoch 2, 60% 	 train_loss: 0.09 took: 12.82s 
+Epoch 2, 70% 	 train_loss: 0.09 took: 13.46s 
+Epoch 2, 80% 	 train_loss: 0.08 took: 13.66s 
+Epoch 2, 90% 	 train_loss: 0.08 took: 13.60s 
+Train Accuracy of the model at epoch 1 on the 60000 train images: 95.63333333333334 % 
+Test Accuracy of the model on the 625 test images: 97.55 % 
+Epoch 3, 10% 	 train_loss: 0.07 took: 13.90s 
+Epoch 3, 20% 	 train_loss: 0.06 took: 13.52s 
+Epoch 3, 30% 	 train_loss: 0.08 took: 13.91s 
+Epoch 3, 40% 	 train_loss: 0.07 took: 14.10s 
+Epoch 3, 50% 	 train_loss: 0.08 took: 13.86s 
+Epoch 3, 60% 	 train_loss: 0.08 took: 14.06s 
+Epoch 3, 70% 	 train_loss: 0.08 took: 14.49s 
+Epoch 3, 80% 	 train_loss: 0.08 took: 14.82s 
+Epoch 3, 90% 	 train_loss: 0.08 took: 15.12s 
+Train Accuracy of the model at epoch 2 on the 60000 train images: 96.32611111111112 % 
+Test Accuracy of the model on the 625 test images: 97.77 % 
+Epoch 4, 10% 	 train_loss: 0.06 took: 14.95s 
+Epoch 4, 20% 	 train_loss: 0.06 took: 15.41s 
+Epoch 4, 30% 	 train_loss: 0.06 took: 15.71s 
+Epoch 4, 40% 	 train_loss: 0.06 took: 16.67s 
+Epoch 4, 50% 	 train_loss: 0.08 took: 17.91s 
+Epoch 4, 60% 	 train_loss: 0.07 took: 19.35s 
+Epoch 4, 70% 	 train_loss: 0.07 took: 19.80s 
+Epoch 4, 80% 	 train_loss: 0.08 took: 20.25s 
+Epoch 4, 90% 	 train_loss: 0.06 took: 21.10s 
+Train Accuracy of the model at epoch 3 on the 60000 train images: 96.73041666666667 % 
+Test Accuracy of the model on the 625 test images: 97.59 % 
+Epoch 5, 10% 	 train_loss: 0.05 took: 22.04s 
+Epoch 5, 20% 	 train_loss: 0.05 took: 22.58s 
+Epoch 5, 30% 	 train_loss: 0.06 took: 23.08s 
+Epoch 5, 40% 	 train_loss: 0.06 took: 23.29s 
+Epoch 5, 50% 	 train_loss: 0.07 took: 23.39s 
+Epoch 5, 60% 	 train_loss: 0.06 took: 23.09s 
+Epoch 5, 70% 	 train_loss: 0.06 took: 23.09s 
+Epoch 5, 80% 	 train_loss: 0.07 took: 23.99s 
+Epoch 5, 90% 	 train_loss: 0.07 took: 23.21s 
+Train Accuracy of the model at epoch 4 on the 60000 train images: 96.99133333333333 % 
+Test Accuracy of the model on the 625 test images: 97.91 % 
+Total training time was: 12.75mins 
+Test Accuracy of the model on the 625 test images: 97.91 % 
+Program finished for norm weight distribution at run: 0 
+Time taken for norm weight distribution: 797.10s 
+ 
