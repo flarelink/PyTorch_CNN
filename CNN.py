@@ -604,6 +604,58 @@ def early_stopping(min_delta, patience, curr_acc, best_acc, num_bad_epochs):
     return stop, num_bad_epochs
 
 
+def create_parser():
+  """
+  return: parser inputs
+  """
+  parser = argparse.ArgumentParser(
+        description='PyTorch Random CNN implementation.')
+
+  # arguments for logging
+  parser.add_argument('--log_name', type=str, default='testing',
+                        help='Specify log name, if None then program will not run; default=None')
+
+  # arguments for dataset and data
+  parser.add_argument('--MNIST', type=str2bool, nargs='?', default=True,
+                        help='Uses the MNIST dataset if set to True; default=True')
+  parser.add_argument('--CIFAR10', type=str2bool, nargs='?', default=False,
+                        help='Uses the CIFAR-10 dataset if set to True; default=False')
+
+  # arguments for convolutions in CNN
+  parser.add_argument('--nf', type=int, default=64,
+                        help='Number of filters for conv layers; default=64')
+  parser.add_argument('--filter_d', type=int, default=3,
+                        help='Size of filters for conv layers; default=3')
+  parser.add_argument('--t_conv', type=int, default=1,
+                        help='Chooses conv type 1 - single random conv layer\
+                                                2 - two random conv layers \
+                                                3 - half train half random single conv layer \
+                                                4 - fully trained single conv layer \
+                                                default=1')
+
+  # arguments for hyperparameters
+  parser.add_argument('--n_epochs', type=int, default=50,
+                        help='Defines num epochs for training; default=50')
+  parser.add_argument('--n_runs', type=int, default=1,
+                        help='Defines num runs for program; default=1')
+  parser.add_argument('--batch_size', type=int, default=16,
+                        help='Defines batch size for data; default=16')
+  parser.add_argument('--lr', type=float, default=0.001,
+                        help='Defines learning rate for training; default=0.001')
+  parser.add_argument('--decay', type=float, default=0.0004,
+                        help='Defines decay for training; default=0.0004')
+  parser.add_argument('--delta', type=float, default=0.001,
+                        help='Defines min delta for early stopping; default=0.001')
+  parser.add_argument('--patience', type=int, default=30,
+                        help='Defines patience for early stopping; default=30')
+  parser.add_argument('--random_seed', type=int, default=7,
+                        help='Defines random seed value; default=7')
+
+  args = parser.parse_args()
+
+  return args
+
+
 """
 ##############################################################################
 # Main, where all the magic starts~
@@ -623,52 +675,7 @@ if __name__ == '__main__':
             raise argparse.ArgumentTypeError('Boolean value expected.')
     
     # parsing input arguments
-    parser = argparse.ArgumentParser(
-        description='PyTorch Random CNN implementation.'
-    )
-
-    # arguments for logging
-    parser.add_argument('--log_name', type=str, default='testing',
-                        help='Specify log name, if None then program will not run; default=None')
-
-    # arguments for dataset and data
-    parser.add_argument('--MNIST', type=str2bool, nargs='?', default=True,
-                        help='Uses the MNIST dataset if set to True; default=True')
-    parser.add_argument('--CIFAR10', type=str2bool, nargs='?', default=False,
-                        help='Uses the CIFAR-10 dataset if set to True; default=False')
-
-    # arguments for convolutions in CNN
-    parser.add_argument('--nf', type=int, default=64,
-                        help='Number of filters for conv layers; default=64')
-    parser.add_argument('--filter_d', type=int, default=3,
-                        help='Size of filters for conv layers; default=3')
-    parser.add_argument('--t_conv', type=int, default=1,
-                        help='Chooses conv type 1 - single random conv layer\
-                                                2 - two random conv layers \
-                                                3 - half train half random single conv layer \
-                                                4 - fully trained single conv layer \
-                                                default=1')
-
-    # arguments for hyperparameters
-    parser.add_argument('--n_epochs', type=int, default=50,
-                        help='Defines num epochs for training; default=50')
-    parser.add_argument('--n_runs', type=int, default=1,
-                        help='Defines num runs for program; default=1')
-    parser.add_argument('--batch_size', type=int, default=16,
-                        help='Defines batch size for data; default=16')
-    parser.add_argument('--lr', type=float, default=0.001,
-                        help='Defines learning rate for training; default=0.001')
-    parser.add_argument('--decay', type=float, default=0.0004,
-                        help='Defines decay for training; default=0.0004')
-    parser.add_argument('--delta', type=float, default=0.001,
-                        help='Defines min delta for early stopping; default=0.001')
-    parser.add_argument('--patience', type=int, default=30,
-                        help='Defines patience for early stopping; default=30')
-    parser.add_argument('--random_seed', type=int, default=7,
-                        help='Defines random seed value; default=7')
-
-    args = parser.parse_args()
-
+    args = create_parser()
 
     # Hyper parameters, commented out variables are now in parser
     # batch_size        = 16
