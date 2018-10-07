@@ -47,7 +47,7 @@ else:
     
 
 
-def load_data_MNIST(batch_size,):
+def load_data_MNIST(batch_size):
     """
     Load MNIST dataloaders
     :param batch_size: batch size for datasets
@@ -72,7 +72,7 @@ def load_data_MNIST(batch_size,):
     return trainloader, testloader
 
 
-def load_data_CIFAR10(batch_size,):
+def load_data_CIFAR10(batch_size):
     """
     Load CIFAR-10 dataloaders
     :param batch_size: batch size for datasets
@@ -108,9 +108,10 @@ def load_data_CIFAR10(batch_size,):
 def weight_switcher(weight_type, nf, filter_d, in_chan):
     """
     Determines what weight type to return
-    :param weight_type: selected weight type
-    :param nf: number of filters
-    :param filter_d: filter size
+    :param weight_type: selected weight type distribution
+    :param nf:          number of filters
+    :param filter_d:    filter size
+    :param in_chan:     number of color channels
     :return: weights as a torch for Pytorch
     """
 
@@ -118,8 +119,9 @@ def weight_switcher(weight_type, nf, filter_d, in_chan):
         """
         Normalized weight distribution with mean of 0 and standard deviation of 0.05
 
-        :param nf: # of filters
-        :param filter_d: kernel size aka filter size
+        :param nf:          number of filters
+        :param filter_d:    filter size
+        :param in_chan:     number of color channels
         :return: weight distribution
         """
         return np.random.normal(loc=0.0, scale=0.05, size=(nf, in_chan, filter_d, filter_d))
@@ -128,8 +130,9 @@ def weight_switcher(weight_type, nf, filter_d, in_chan):
         """
         Laplace weight distribution with mean of 0 and decay of 0.05
 
-        :param nf: # of filters
-        :param filter_d: kernel size aka filter size
+        :param nf:          number of filters
+        :param filter_d:    filter size
+        :param in_chan:     number of color channels
         :return: weight distribution
         """
         return np.random.laplace(loc=0.0, scale=0.05, size=(nf, in_chan, filter_d, filter_d))
@@ -138,8 +141,9 @@ def weight_switcher(weight_type, nf, filter_d, in_chan):
         """
         Logistic weight distribution
 
-        :param nf: # of filters
-        :param filter_d: kernel size aka filter size
+        :param nf:          number of filters
+        :param filter_d:    filter size
+        :param in_chan:     number of color channels
         :return: weight distribution
         """
         return np.random.logistic(loc=0.0, scale=0.05, size=(nf, in_chan, filter_d, filter_d))
@@ -148,8 +152,9 @@ def weight_switcher(weight_type, nf, filter_d, in_chan):
         """
         Uniform weight distribution
 
-        :param nf: # of filters
-        :param filter_d: kernel size aka filter size
+        :param nf:          number of filters
+        :param filter_d:    filter size
+        :param in_chan:     number of color channels
         :return: weight distribution
         """
         return np.random.uniform(low=-0.05, high=0.05, size=(nf, in_chan, filter_d, filter_d))
@@ -159,11 +164,14 @@ def weight_switcher(weight_type, nf, filter_d, in_chan):
         """
         Gaussian correlaton weight distribution
 
-        :param nf: # of filters
-        :param filter_d: kernel size aka filter size
-        :param r: determines correlation for Gaussian,
-                  if desired correlation = 0, then r = 0.0; if desired correlation = 1, then r = 0.1 etc. until 9
-                  exception is only for correlation = 10, then r = 0.99
+        :param nf:          number of filters
+        :param filter_d:    filter size
+        :param in_chan:     number of color channels
+        :param r:           determines correlation for Gaussian; if desired
+                            correlation = 0, then r = 0.0, if desired
+                            correlation = 1, then r = 0.1, etc. until 9
+                            exception is only for correlation = 10, then r =
+                            0.99
         :return: weight distribution
         """
 
@@ -232,11 +240,11 @@ def weight_switcher(weight_type, nf, filter_d, in_chan):
 
 def outputSize(in_size, kernel_size, stride, padding):
     """
-    Calculates output size from conv layer
-    :param in_size: image size, ex: 28 x 28 image means in_size = 28
+    Help function to calculate output size from conv layer
+    :param in_size:     image size, ex: 28 x 28 image means in_size = 28
     :param kernel_size: filter size
-    :param stride: stride for conv
-    :param padding: padding for conv
+    :param stride:      stride for conv operator
+    :param padding:     padding for conv
     :return: output size for conv layer
     """
     output = int((in_size - kernel_size + 2*(padding)) / stride) + 1
@@ -324,7 +332,7 @@ class CNN_2Lay(nn.Module):
 class CNN_1Lay_Split(nn.Module):
     """
     CNN with 2 conv layers merged to form 1 conv layer where 50% trained and 50% random
-     and 1 fully connected layer
+    and 1 fully connected layer
     """
     # Convolutional neural network (two convolutional layers)
     def __init__(self, nf=32, filter_d=3, weights=None, in_chan=1, num_classes=10):
@@ -410,12 +418,15 @@ def training(num_epochs, batch_size, train_data, model, learning_rate, decay, lo
     """
     Training for random CNN
 
-    :param num_epochs: number of epochs to train for
-    :param train_data: the train data input images
-    :param model: the CNN model
+    :param num_epochs:    number of epochs to train for
+    :param batch_size:    batch size defined for incoming data
+    :param train_data:    the train data input images
+    :param model:         the CNN model
     :param learning_rate: learning rate for ADAM optimizer
-    :param decay: decay for ADAM optimizer
-    :param log_file: logging file to be printed to
+    :param decay:         decay for ADAM optimizer
+    :param log_file:      logging file to be printed to
+    :param min_delta:     parameter for early stopping (WIP)
+    :param patience:      parameter for early stopping (WIP)
     :return: train accuracy, train time, list of loss values over epochs,
              and list of training & testing accuracies over epochs
     """
@@ -527,8 +538,8 @@ def testing(test_data, model, log_file):
     Testing for random CNN
 
     :param test_data: test data input images
-    :param model: the CNN model
-    :param log_file: logging file to be printed to
+    :param model:     the CNN model
+    :param log_file:  logging file to be printed to
     :return: test accuracy and test time
     """
 
@@ -568,10 +579,10 @@ def early_stopping(min_delta, patience, curr_acc, best_acc, num_bad_epochs):
     Performs early stopping when accuracies aren't changing
     TODO - Needs to be fixed
 
-    :param min_delta: minimum change between the best accuracy and current accuracy
-    :param patience: how many epochs to check for till stopping
-    :param curr_acc: the current accuracy
-    :param best_acc: the best accuracy
+    :param min_delta:      minimum change between the best accuracy and current accuracy
+    :param patience:       how many epochs to check for till stopping
+    :param curr_acc:       the current accuracy
+    :param best_acc:       the best accuracy
     :param num_bad_epochs: number of bad epochs seen
     :return: stop variable to say if we should stop training and number of bad epochs
     """
@@ -681,7 +692,7 @@ if __name__ == '__main__':
     # checking dataset for logging
     if(args.MNIST == True):
         in_chan = 1
-        dataset = 'MSTAR'
+        dataset = 'MNIST'
     elif(args.CIFAR10 == True):
         in_chan = 3
         dataset = 'CIFAR10'
